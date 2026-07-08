@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>تسجيل الدخول — لوحة تحكم نقطة انطلاقة</title>
+<link rel="icon" type="image/png" href="assets/np-mark-blue.png" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--navy); }
+  .login-card { width: 100%; max-width: 380px; background: #fff; border-radius: 22px; padding: 40px 34px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .5); margin: 20px; }
+  .login-brand { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .login-brand img { height: 48px; }
+  .login-brand span { font-weight: 900; font-size: 19px; color: var(--navy); }
+  .login-title { font-size: 18px; font-weight: 800; color: var(--navy); margin: 0 0 22px; text-align: center; }
+  .login-field { margin-bottom: 16px; }
+  .login-field label { display: block; font-weight: 700; font-size: 13.5px; color: var(--text-muted); margin-bottom: 6px; }
+  .login-field input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--border); font-family: inherit; font-size: 15px; }
+  .login-error { color: #C0392B; font-size: 13.5px; margin: -6px 0 14px; display: none; }
+  .login-error.visible { display: block; }
+  .login-submit { width: 100%; justify-content: center; margin-top: 6px; }
+</style>
+</head>
+<body>
+<div class="login-card">
+  <div class="login-brand">
+    <img src="assets/np-mark-blue.png" alt="نقطة انطلاقة" />
+    <span>لوحة تحكم نقطة انطلاقة</span>
+  </div>
+  <h1 class="login-title">تسجيل الدخول</h1>
+  <form id="loginForm" novalidate>
+    <div class="login-field">
+      <label for="username">اسم المستخدم</label>
+      <input type="text" id="username" autocomplete="username" required />
+    </div>
+    <div class="login-field">
+      <label for="password">كلمة المرور</label>
+      <input type="password" id="password" autocomplete="current-password" required />
+    </div>
+    <p class="login-error" id="loginError"></p>
+    <button type="submit" class="btn btn-primary login-submit" id="loginSubmitBtn">دخول</button>
+  </form>
+</div>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const form = $("loginForm");
+  const errorEl = $("loginError");
+  const submitBtn = $("loginSubmitBtn");
+
+  function showError(message) {
+    errorEl.textContent = message;
+    errorEl.classList.add("visible");
+  }
+
+  function hideError() {
+    errorEl.classList.remove("visible");
+  }
+
+  function getRedirectTarget() {
+    const params = new URLSearchParams(location.search);
+    const next = params.get("next");
+    // يُقبل فقط مسار نسبي داخل نفس الموقع (يبدأ بـ / وليس //) لتفادي أي إعادة توجيه خارجية
+    if (next && next.startsWith("/") && !next.startsWith("//")) return next;
+    return "/admin";
+  }
+
+  // إن كانت هناك جلسة صالحة بالفعل، انتقل مباشرة للوحة التحكم
+  fetch("/api/admin/responses", { method: "GET" }).then((res) => {
+    if (res.ok) location.href = getRedirectTarget();
+  }).catch(() => {});
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    hideError();
+
+    const username = $("username").value.trim();
+    const password = $("password").value;
+
+    if (!username || !password) {
+      showError("يرجى تعبئة اسم المستخدم وكلمة المرور");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "جارٍ الدخول...";
+
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        showError(data.error || "تعذّر تسجيل الدخول");
+        return;
+      }
+      location.href = getRedirectTarget();
+    } catch (err) {
+      showError("تعذّر الاتصال بالخادم، حاول مرة أخرى");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "دخول";
+    }
+  });
+})();
+</script>
+</body>
+</html>

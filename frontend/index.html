@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>نقطة انطلاقة — من فكرة إلى نقطة انطلاق</title>
+<link rel="icon" type="image/png" href="assets/np-mark-blue.png" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <img src="assets/np-mark-blue.png" alt="نقطة انطلاقة" />
+      <span class="brand-text">
+        <span class="brand-name" id="brandName">نقطة انطلاقة</span>
+        <span class="brand-sub" id="brandSub">LAUNCH POINT</span>
+      </span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <span id="navLinks" class="nav-links-inline"></span>
+      <button class="hamburger-btn" id="hamburgerBtn" type="button" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <button class="lang-toggle" id="langToggle" type="button"><span class="lang-dot"></span><span id="langToggleLabel">EN</span></button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== قائمة الجوال الجانبية (Drawer) ===================== -->
+<div class="nav-drawer-overlay hidden" id="navDrawerOverlay">
+  <div class="nav-drawer">
+    <button class="nav-drawer-close" id="navDrawerCloseBtn" type="button" aria-label="Close">&times;</button>
+    <nav class="nav-drawer-links" id="navDrawerLinks"></nav>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section id="top" class="hero">
+  <div class="hero-ring-1"></div>
+  <div class="hero-ring-2"></div>
+  <img class="hero-watermark" src="assets/np-mark-white2.png" alt="" />
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="eyebrow-dot"></span><span id="heroEyebrow"></span></div>
+      <h1 class="hero-title"><span id="heroTitle1"></span><br /><span id="heroTitle2" class="accent"></span></h1>
+      <p class="hero-sub" id="heroSub"></p>
+      <div class="hero-ctas">
+        <a href="#discover" class="btn btn-primary"><span id="heroCta1"></span><span id="heroArrow1">←</span></a>
+        <a href="#about" class="btn btn-ghost" id="heroCta2"></a>
+      </div>
+    </div>
+    <div class="hero-orbit">
+      <div class="orbit-ring-1"><span></span></div>
+      <div class="orbit-ring-2"></div>
+      <div class="orbit-core"><img src="assets/np-mark-white2.png" alt="" /></div>
+    </div>
+  </div>
+  <div class="hero-tagline-row">
+    <div class="hero-tagline" id="heroTagline"></div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="section wrap">
+  <div class="about-grid">
+    <div>
+      <div class="kicker" id="aboutKicker"></div>
+      <h2 class="section-title" id="aboutTitle"></h2>
+      <p class="section-body" id="aboutBody"></p>
+      <div id="aboutImageWrap"></div>
+      <div class="about-stats" id="aboutStats"></div>
+    </div>
+    <div class="about-cards" id="aboutCards"></div>
+  </div>
+</section>
+
+<!-- ===================== ACTIVITIES ===================== -->
+<section id="activities" class="section activities-section">
+  <div class="wrap">
+    <div class="activities-head">
+      <div>
+        <div class="kicker" id="actKicker"></div>
+        <h2 class="section-title" id="actTitle" style="margin-bottom:12px;"></h2>
+        <p id="actSub"></p>
+      </div>
+    </div>
+    <div class="activities-grid" id="activitiesGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== DISCOVER (QUIZ) ===================== -->
+<section id="discover" class="section discover-section">
+  <div class="discover-ring"></div>
+  <img class="discover-watermark" src="assets/np-mark-white2.png" alt="" />
+  <div class="discover-inner">
+    <div class="kicker" id="discKicker"></div>
+    <h2 class="discover-title" id="discTitle"></h2>
+    <p class="discover-sub" id="discSub"></p>
+
+    <div class="quiz-panel">
+      <!-- شاشة البداية -->
+      <div id="quizIntro">
+        <div class="quiz-domains" id="quizDomains"></div>
+        <div class="quiz-intro-actions">
+          <button class="btn btn-primary" id="startQuizBtn" type="button" style="justify-content:center;">
+            <span id="discStart"></span><span>←</span>
+          </button>
+          <div class="quiz-meta-row">
+            <span id="discMeta1"></span><span class="sep">·</span>
+            <span id="discMeta2"></span><span class="sep">·</span>
+            <span id="discMeta3"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- شاشة السؤال -->
+      <div id="quizQuestion" class="hidden">
+        <div class="quiz-q-head">
+          <span class="quiz-q-count"><span id="discQLabel"></span> <span id="qNum"></span> <span id="qTotalWrap">/ <span id="qTotal"></span></span></span>
+          <button class="quiz-back" id="quizBackBtn" type="button"></button>
+        </div>
+        <div class="quiz-progress"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+        <h3 class="quiz-question-text" id="quizQuestionText"></h3>
+        <div class="quiz-options" id="quizOptions"></div>
+      </div>
+
+      <!-- شاشة بيانات الزائر (مُدرجة داخل الاستبيان، غير موجودة في التصميم الأصلي) -->
+      <div id="quizVisitor" class="hidden">
+        <h3 class="visitor-title" id="visitorTitle"></h3>
+        <p class="visitor-sub" id="visitorSub"></p>
+
+        <label class="field"><span id="labelFullName"></span><input type="text" id="fullName" autocomplete="name" required /><span class="field-error hidden" id="fullNameError"></span></label>
+        <div class="field-grid">
+          <label class="field"><span id="labelAge"></span><input type="number" id="age" min="1" max="120" autocomplete="off" /><span class="field-error hidden" id="ageError"></span></label>
+          <label class="field"><span id="labelGender"></span><select id="gender" autocomplete="sex"></select></label>
+        </div>
+        <label class="field"><span id="labelCity"></span><input type="text" id="city" autocomplete="address-level2" /></label>
+        <label class="field"><span id="labelEmail"></span><input type="email" id="email" dir="ltr" autocomplete="email" /><span class="field-error hidden" id="emailError"></span></label>
+        <label class="field"><span id="labelPhone"></span><input type="tel" id="phone" dir="ltr" autocomplete="tel" /><span class="field-error hidden" id="phoneError"></span></label>
+        <label class="field"><span id="labelStatus"></span><select id="status" autocomplete="off"></select></label>
+
+        <p class="error-text hidden" id="visitorError"></p>
+        <button class="btn btn-primary" id="visitorSubmitBtn" type="button" style="width:100%; justify-content:center;"></button>
+      </div>
+
+      <!-- شاشة النتيجة -->
+      <div id="quizResult" class="hidden">
+        <div class="quiz-result-head">
+          <div class="result-kicker" id="discResultKicker"></div>
+          <div class="result-h" id="discResultH"></div>
+          <div class="result-top-label" id="topLabel"></div>
+          <div class="result-and-then" id="andThenRow"></div>
+        </div>
+        <div class="result-card">
+          <div class="result-card-head">
+            <span class="result-dot" id="topDot"></span>
+            <span class="result-card-title" id="topLabel2"></span>
+            <span class="result-card-pct" id="topPct"></span>
+          </div>
+          <p id="topDesc"></p>
+        </div>
+        <div class="result-mix-label" id="discYourMix"></div>
+        <div class="result-mix" id="resultMix"></div>
+        <div class="result-footer">
+          <span id="discShareNote"></span>
+          <button class="btn-outline" id="restartBtn" type="button"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="section wrap">
+  <div class="contact-head">
+    <div class="kicker" id="contactKicker"></div>
+    <h2 class="section-title" id="contactTitle"></h2>
+    <p id="contactSub"></p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-form-card">
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field-grid">
+          <label class="field"><span id="fLabelName"></span><input type="text" id="cName" autocomplete="name" /><span class="field-error hidden" id="cNameError"></span></label>
+          <label class="field"><span id="fLabelPhone"></span><input type="tel" id="cPhone" dir="ltr" autocomplete="tel" /><span class="field-error hidden" id="cPhoneError"></span></label>
+        </div>
+        <label class="field"><span id="fLabelEmail"></span><input type="email" id="cEmail" dir="ltr" autocomplete="email" /><span class="field-error hidden" id="cEmailError"></span></label>
+        <label class="field"><span id="fLabelInterest"></span><select id="cInterest"></select></label>
+        <label class="field"><span id="fLabelMsg"></span><textarea id="cMsg" rows="4"></textarea><span class="field-error hidden" id="cMsgError"></span></label>
+        <p class="error-text hidden" id="contactError"></p>
+        <button type="submit" class="contact-submit" id="fSendBtn"></button>
+      </form>
+      <div id="contactSent" class="sent-state hidden">
+        <div class="sent-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001F65" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+        </div>
+        <div class="sent-text" id="fSentText"></div>
+      </div>
+    </div>
+
+    <div class="contact-side">
+      <div class="whatsapp-card">
+        <div class="whatsapp-ring"></div>
+        <img class="whatsapp-watermark" src="assets/np-mark-white2.png" alt="" />
+        <div style="position:relative;">
+          <div class="whatsapp-icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.15-1.7-.83-1.96-.93-.26-.1-.45-.15-.64.15-.19.29-.74.93-.9 1.12-.17.19-.33.21-.62.07-.29-.15-1.22-.45-2.32-1.43-.86-.77-1.44-1.71-1.6-2-.17-.29-.02-.45.12-.6.13-.13.29-.33.44-.5.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.15-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.15.19 2.01 3.06 4.86 4.29.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34zM12.05 2C6.5 2 2 6.5 2 12.06c0 1.77.46 3.5 1.35 5.02L2 22l5.05-1.32a10 10 0 0 0 5 1.28h.01c5.55 0 10.05-4.5 10.05-10.06C22.11 6.5 17.6 2 12.05 2z"></path></svg>
+          </div>
+          <div class="whatsapp-title" id="waT"></div>
+          <p class="whatsapp-body" id="waB"></p>
+          <a href="https://whatsapp.com/channel/PLACEHOLDER" target="_blank" rel="noopener" class="whatsapp-btn" id="whatsappChannelBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.15-1.7-.83-1.96-.93-.26-.1-.45-.15-.64.15-.19.29-.74.93-.9 1.12-.17.19-.33.21-.62.07-.29-.15-1.22-.45-2.32-1.43-.86-.77-1.44-1.71-1.6-2-.17-.29-.02-.45.12-.6.13-.13.29-.33.44-.5.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.15-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.15.19 2.01 3.06 4.86 4.29.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34zM12.05 2C6.5 2 2 6.5 2 12.06c0 1.77.46 3.5 1.35 5.02L2 22l5.05-1.32a10 10 0 0 0 5 1.28h.01c5.55 0 10.05-4.5 10.05-10.06C22.11 6.5 17.6 2 12.05 2z"></path></svg>
+            <span id="waBtn"></span>
+          </a>
+        </div>
+      </div>
+      <div class="reach-card">
+        <div class="reach-label" id="reach"></div>
+        <div class="reach-links" id="reachLinks"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <img class="footer-watermark" src="assets/np-mark-white2.png" alt="" />
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-row">
+        <img src="assets/np-mark-white2.png" alt="" />
+        <div>
+          <div class="footer-brand-name" id="footBrandName"></div>
+          <div class="footer-brand-sub" id="footBrandSub">LAUNCH POINT</div>
+        </div>
+      </div>
+      <p class="footer-tagline" id="footTagline"></p>
+    </div>
+    <div>
+      <div class="footer-col-title" id="footLinks"></div>
+      <div class="footer-links" id="footNavLinks"></div>
+    </div>
+    <div>
+      <div class="footer-col-title" id="footFollow"></div>
+      <div class="footer-social" id="footerSocial"></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner" id="footRights"></div>
+  </div>
+</footer>
+
+<!-- ===================== Modal: التسجيل في فعالية ===================== -->
+<div id="regModalOverlay" class="modal-overlay hidden">
+  <div class="modal-dialog">
+    <button class="modal-close" id="regModalCloseBtn" type="button" aria-label="Close">&times;</button>
+    <h3 class="modal-title" id="regModalTitle"></h3>
+    <p class="modal-event-name" id="regModalEventName"></p>
+
+    <form id="regForm" novalidate>
+      <label class="field"><span id="regLabelName"></span><input type="text" id="regName" autocomplete="name" /><span class="field-error hidden" id="regNameError"></span></label>
+      <label class="field"><span id="regLabelEmail"></span><input type="email" id="regEmail" dir="ltr" autocomplete="email" /><span class="field-error hidden" id="regEmailError"></span></label>
+      <label class="field"><span id="regLabelPhone"></span><input type="tel" id="regPhone" dir="ltr" autocomplete="tel" /><span class="field-error hidden" id="regPhoneError"></span></label>
+      <label class="field"><span id="regLabelNote"></span><textarea id="regNote" rows="3"></textarea></label>
+      <p class="error-text hidden" id="regFormError"></p>
+      <button type="submit" class="btn btn-primary" id="regSubmitBtn" style="width:100%; justify-content:center;"></button>
+    </form>
+    <div id="regSentState" class="sent-state hidden">
+      <div class="sent-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#001F65" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+      </div>
+      <div class="sent-text" id="regSentText"></div>
+    </div>
+  </div>
+</div>
+
+<script src="translations.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
